@@ -21,14 +21,14 @@ export const MainBox = styled.div<{ openMenu: string }>`
   width: 250px;
   height: 100%;
   min-height: 100vh;
-  background-color: #FDEFC3;
+  background-color: #fdefc3;
 
   @media screen and (max-width: 950px) {
     transition: 350ms transform ease-in-out;
     position: absolute;
     z-index: 10;
     transform: ${({ openMenu }) =>
-    openMenu === "open" ? "translateX(0%)" : "translateX(-100%)"};
+      openMenu === "open" ? "translateX(0%)" : "translateX(-100%)"};
   }
 `;
 
