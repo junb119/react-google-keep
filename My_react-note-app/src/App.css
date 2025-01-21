@@ -1,0 +1,6 @@
+.app {
+  display: flex;
+}
+.app__container {
+  flex: 1;
+}

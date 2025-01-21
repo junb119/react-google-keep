@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CreateNoteModal = () => {
-  return (
-    <div>CreateNoteModal</div>
-  )
-}
+  return <div>CreateNoteModal</div>;
+};
 
-export default CreateNoteModal
+export default CreateNoteModal;

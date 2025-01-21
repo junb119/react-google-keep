@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const TopBox = styled.div`
   margin-right: 25px;
-  
+
   .notes__filter-btn {
     display: flex;
     justify-content: flex-end;
   }
-  
+
   @media screen and (max-width: 650px) {
-    margin-right: 0px;  
+    margin-right: 0px;
   }
 `;
 
