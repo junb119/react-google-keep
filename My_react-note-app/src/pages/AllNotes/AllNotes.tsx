@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ButtonOutline, Container, EmptyMsgBox } from "../../styles/styles";
 import { Box, InputBox, TopBox } from "./AllNotes.styles";
 import { toggleFiltersModal } from "../../store/modal/modalSlice";
+import getAllNotes from "../../utils/getAllNotes";
 
 const AllNotes = () => {
   const dispatch = useAppDispatch();
@@ -36,7 +37,10 @@ const AllNotes = () => {
               </ButtonOutline>
             </div>
           </TopBox>
-          <Box>{/* Notes */}</Box>
+          <Box>
+            {/* Notes */}
+            {getAllNotes(mainNotes, filter)}
+          </Box>
         </>
       )}
     </Container>
