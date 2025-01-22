@@ -13,9 +13,13 @@ import {
   Navigate,
 } from "react-router-dom";
 import "./App.css";
+import { useAppSelector } from "./hooks/redux";
+import { TagsModal } from "./components";
 function App() {
+  const { viewEditTagsModal } = useAppSelector((state) => state.modal);
   return (
     <div className="app">
+      {viewEditTagsModal && <TagsModal type="edit" />}
       <Router>
         <Sidebar />
         <div className="app__container">
