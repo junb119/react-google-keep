@@ -15,11 +15,23 @@ import {
 import "./App.css";
 import { useAppSelector } from "./hooks/redux";
 import { TagsModal } from "./components";
+
+// toast
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const { viewEditTagsModal } = useAppSelector((state) => state.modal);
   return (
     <div className="app">
       {viewEditTagsModal && <TagsModal type="edit" />}
+      <ToastContainer
+        position="bottom-right"
+        theme="light"
+        pauseOnHover
+        autoClose={1500}
+      />
+      ;
       <Router>
         <Sidebar />
         <div className="app__container">
