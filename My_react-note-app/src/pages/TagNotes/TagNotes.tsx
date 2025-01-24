@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const TagNotes = () => {
-  return (
-    <div>TagNotes</div>
-  )
-}
+  return <div>TagNotes</div>;
+};
 
-export default TagNotes
+export default TagNotes;
