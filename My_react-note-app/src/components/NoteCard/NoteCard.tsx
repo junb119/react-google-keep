@@ -1,3 +1,4 @@
+import parse from "html-react-parser";
 import { FC } from "react";
 import {
   Card,
@@ -20,6 +21,14 @@ const NoteCard: FC<NoteCardProps> = ({ note, type }) => {
   const dispatch = useAppDispatch();
   const { title, content, tags, color, priority, date, isPinned, isRead, id } =
     note;
+  const func = () => {
+    const imgContent = content.includes("img");
+    if (imgContent) {
+      return content;
+    } else {
+      return content.length > 75 ? content.slice(0, 75) + "..." : content;
+    }
+  };
   return (
     <>
       <Card style={{ backgroundColor: color }}>
@@ -39,7 +48,7 @@ const NoteCard: FC<NoteCardProps> = ({ note, type }) => {
             )}
           </div>
         </TopBox>
-        <ContentBox>{content}</ContentBox>
+        <ContentBox>{parse(func())}</ContentBox>
 
         <TagsBox>
           {tags?.map(({ tag, id }) => (
