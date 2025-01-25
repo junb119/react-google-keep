@@ -1,14 +1,15 @@
 import { FC, useState } from "react";
-import { Tag } from "styled-components/dist/sheet/types";
+
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { DeleteBox, FixedContainer } from "../Modal.styles";
 import { Box, StyledInput, TagsBox } from "./TagModal.styles";
-import { FaTimes } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTimes } from "react-icons/fa";
 import { toggleTagsModal } from "../../../store/modal/modalSlice";
 import getStandardName from "../../../utils/getStandardName";
 import { v4 } from "uuid";
 import { addTags, deleteTags } from "../../../store/tags/tagsSlice";
 import { removeTags } from "../../../store/notesList/notesListSlice";
+import { Tag } from "../../../types/tag";
 
 interface TagsModalProps {
   type: string;
@@ -58,9 +59,21 @@ const TagsModal: FC<TagsModalProps> = ({ type, addedTags, handleTags }) => {
           {tagsList.map(({ tag, id }) => (
             <li key={id}>
               <div className="editTags__tag">{getStandardName(tag)}</div>
-              <DeleteBox onClick={() => deleteTagsHandler(tag, id)}>
-                <FaTimes />
-              </DeleteBox>
+              {type === "edit" ? (
+                <DeleteBox onClick={() => deleteTagsHandler(tag, id)}>
+                  <FaTimes />
+                </DeleteBox>
+              ) : (
+                <DeleteBox>
+                  {addedTags?.find(
+                    (addedTag: Tag) => addedTag.tag === tag.toLowerCase()
+                  ) ? (
+                    <FaMinus onClick={() => handleTags!(tag, "remove")} />
+                  ) : (
+                    <FaPlus onClick={() => handleTags!(tag, "add")} />
+                  )}
+                </DeleteBox>
+              )}
             </li>
           ))}
         </TagsBox>

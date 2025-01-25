@@ -15,6 +15,8 @@ import {
   toggleCreateNoteModal,
   toggleTagsModal,
 } from "../../../store/modal/modalSlice";
+import TagsModal from "../TagsModal/TagsModal";
+import { v4 } from "uuid";
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
@@ -25,12 +27,25 @@ const CreateNoteModal = () => {
   const [noteColor, setNoteColor] = useState(editNote?.color || "");
   const [priority, setPriority] = useState(editNote?.priority || "low");
 
+  const { viewAddTagsModal } = useAppSelector((state) => state.modal);
   const closeCreateNoteModal = () => {
     dispatch(toggleCreateNoteModal(false));
     dispatch(setEditNote(null));
   };
+
+  const tagsHandler = (tag: string, type: string) => {
+    const newTag = tag.toLowerCase();
+    if (type === "add") {
+      setAddedTags((prev) => [...prev, { tag: newTag, id: v4() }]);
+    } else {
+      setAddedTags(addedTags.filter(({ tag }) => tag !== newTag));
+    }
+  };
   return (
     <FixedContainer>
+      {viewAddTagsModal && (
+        <TagsModal type="add" addedTags={addedTags} handleTags={tagsHandler} />
+      )}
       <Box>
         <TopBox>
           <div className="createNote__title">노트 생성하기</div>
@@ -65,7 +80,10 @@ const CreateNoteModal = () => {
           {addedTags.map(({ tag, id }) => (
             <div key={id}>
               <span className="createNote__tag">{tag}</span>
-              <span className="createNote__tag-remove">
+              <span
+                onClick={() => tagsHandler(tag, "remove")}
+                className="createNote__tag-remove"
+              >
                 <FaTimes />
               </span>
             </div>
