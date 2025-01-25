@@ -70,7 +70,7 @@ export const notesListSlice = createSlice({
     },
     setPinnedNotes: (state, { payload }) => {
       state.mainNotes = state.mainNotes.map((note) =>
-        note.id === payload.id ? { ...note, isPined: !note.isPinned } : note
+        note.id === payload.id ? { ...note, isPinned: !note.isPinned } : note
       );
     },
     setEditNote: (state, { payload }) => {
