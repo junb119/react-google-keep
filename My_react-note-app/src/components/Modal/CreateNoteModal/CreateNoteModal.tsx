@@ -17,6 +17,7 @@ import {
 } from "../../../store/modal/modalSlice";
 import TagsModal from "../TagsModal/TagsModal";
 import { v4 } from "uuid";
+import TextEditor from "../../TextEditor/TextEditor";
 
 const CreateNoteModal = () => {
   const dispatch = useAppDispatch();
@@ -63,7 +64,9 @@ const CreateNoteModal = () => {
           placeholder="제목 ..."
           onChange={(e) => setNoteTitle(e.target.value)}
         />
-
+        <div>
+          <TextEditor value={value} setValue={setValue} color={noteColor} />
+        </div>
         <div className="createNote__create-btn">
           <ButtonFill>
             {editNote ? (
