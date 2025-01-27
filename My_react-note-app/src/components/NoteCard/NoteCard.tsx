@@ -12,7 +12,8 @@ import { NotesIconBox } from "../../styles/styles";
 import { Note } from "../../types/note";
 import getRelevantBtns from "../../utils/getRelevantBtns";
 import { useAppDispatch } from "../../hooks/redux";
-import { setPinnedNotes } from "../../store/notesList/notesListSlice";
+import { readNote, setPinnedNotes } from "../../store/notesList/notesListSlice";
+import ReadNoteModal from "../Modal/ReadNoteModal/ReadNoteModal";
 interface NoteCardProps {
   note: Note;
   type: string;
@@ -31,6 +32,7 @@ const NoteCard: FC<NoteCardProps> = ({ note, type }) => {
   };
   return (
     <>
+      {isRead && <ReadNoteModal note={note} type={type} />}
       <Card style={{ backgroundColor: color }}>
         <TopBox>
           <div className="noteCard__title">
@@ -48,7 +50,9 @@ const NoteCard: FC<NoteCardProps> = ({ note, type }) => {
             )}
           </div>
         </TopBox>
-        <ContentBox>{parse(func())}</ContentBox>
+        <ContentBox onClick={() => dispatch(readNote({ type, id }))}>
+          {parse(func())}
+        </ContentBox>
 
         <TagsBox>
           {tags?.map(({ tag, id }) => (
